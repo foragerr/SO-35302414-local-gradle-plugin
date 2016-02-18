@@ -1,0 +1,17 @@
+group = 'net.foragerr.foo'
+version = '1.0.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile localGroovy()
+	compile gradleApi()
+	compile 'org.apache.commons:commons-math3:3.4.1'
+	compile	'org.apache.commons:commons-pool2:2.3'
+	testCompile 'junit:junit:4.11'
+}

@@ -1,0 +1,17 @@
+	ext.pluginProjectDir = 'foo-gradle-plugin'
+	task buildPluginProject(type: GradleBuild){
+		buildFile = pluginProjectDir + '/build.gradle'
+		tasks = ['clean','build']
+	}
+	
+	ext.pluginConsumerProjectDir = 'foo-plugin-consumer'
+	task buildPluginConsumerProject(type: GradleBuild, dependsOn: buildPluginProject){
+		buildFile = pluginConsumerProjectDir + '/build.gradle'
+		tasks = ['clean','build']
+	}
+	
+	task clean(type:Delete){
+		delete "$pluginProjectDir/build", "$pluginConsumerProjectDir/build"
+	}
+	
+	tasks.create('build').dependsOn(buildPluginConsumerProject)

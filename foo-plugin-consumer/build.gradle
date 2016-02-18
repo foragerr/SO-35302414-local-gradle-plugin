@@ -1,0 +1,28 @@
+buildscript{
+	repositories{
+		mavenCentral()
+	}
+	
+	dependencies{
+		classpath fileTree(dir:'../foo-gradle-plugin/build/libs', include: ['*.jar'])
+		classpath 'com.google.code.gson:gson:2.3.1'
+	}
+}
+
+
+apply plugin: 'java'
+apply plugin: net.foragerr.foo.gradle.plugins.FooPlugin
+
+repositories{
+	mavenCentral()
+}
+	
+dependencies{	
+	compile ('com.google.code.gson:gson:2.3.1')
+}
+
+task list()<<{
+	project.configurations.compile.find {println it.name}
+	println ('--')
+	println project.buildscript.configurations.classpath.asPath
+}
